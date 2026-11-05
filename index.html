@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IR Specimen Guide · Mount Sinai</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#011F5B;      /* Penn blue */
+    --blue-2:#0B2D6E;
+    --red:#990000;       /* Penn red */
+    --red-soft:#F6E6E6;
+    --accent:#F4A7A7;
+    --bg:#F5F6F9;
+    --card:#FFFFFF;
+    --ink:#1A1F2E;
+    --muted:#5E6577;
+    --line:#DDE1EA;
+    --ok:#1E7B4B; --ok-bg:#E4F3EA;
+    --warn:#8A5A00; --warn-bg:#FFF3D6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+
+  header{background:var(--blue);color:#fff;padding:18px 16px 16px;border-bottom:4px solid var(--red)}
+  .hwrap{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:12px}
+  .logo-slot{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+  .logo-slot img{width:100%;height:100%;object-fit:contain}
+  .logo-slot span{font-weight:700;font-size:13px;letter-spacing:.5px}
+  h1{font-size:19px;font-weight:700;line-height:1.2}
+  .sub{font-size:12.5px;opacity:.8;margin-top:2px}
+
+  main{flex:1;width:100%;max-width:940px;margin:0 auto;padding:18px 16px 32px}
+
+  .crumbs:empty{display:none}
+  .intro{padding:6px 0 4px}
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red)}
+  .intro-h{font-size:26px;line-height:1.2;margin:6px 0 10px}
+  .intro-p{font-size:15px;color:var(--muted);line-height:1.5}
+  .btn.start{width:100%;margin:18px 0 20px;padding:14px;font-size:16px}
+  .how{display:grid;gap:8px;margin-bottom:14px}
+  .how div{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px;font-weight:500}
+  .how span{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .rule{background:var(--red-soft);border-left:4px solid var(--red);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.45}
+  .rule b{color:var(--red)}
+  .src{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .src .badge{margin:0;font-size:10.5px;padding:1px 7px}
+  .crumbs{display:flex;align-items:center;gap:10px;margin-bottom:12px;min-height:34px}
+  .back{font:inherit;font-size:14px;font-weight:600;color:var(--blue);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;flex-shrink:0}
+  .back:hover{border-color:var(--blue)}
+  .ctx{font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rc{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:12px 14px;margin-top:10px}
+  .rc.pending{border-left-color:var(--line);color:var(--muted)}
+  .rc-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .rc h3{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--red)}
+  .rc .badge{margin:0;font-size:10.5px;padding:2px 8px}
+  .rc .how{font-size:15.5px;font-weight:700;color:var(--blue);margin-top:4px;line-height:1.3}
+  .rc .med{font-size:14px;margin-top:2px;line-height:1.35}
+  .rc .dont{font-size:13px;color:var(--red);margin-top:6px;line-height:1.35}
+  .rc .dest{font-size:13.5px;margin-top:8px;line-height:1.4}
+  .rc .dest b{color:var(--blue)}
+  .rc .notes{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45;padding-top:6px;border-top:1px solid var(--line)}
+  .rc details{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.45}
+  .rc summary{cursor:pointer;font-weight:600;color:var(--blue);font-size:13px}
+  .rc details p{margin-top:6px}
+  .rc details b{color:var(--ink)}
+  .crumb{font-size:12px;font-weight:600;background:var(--card);border:1px solid var(--line);color:var(--blue);padding:4px 10px;border-radius:999px;cursor:pointer}
+  .crumb:hover{border-color:var(--blue)}
+
+  .step-label{font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  h2{font-size:21px;font-weight:700;color:var(--blue);margin-bottom:14px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid.one{grid-template-columns:1fr}
+  .opt{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:14px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;transition:border-color .15s,transform .1s,box-shadow .15s;min-height:64px}
+  .opt:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(1,31,91,.08)}
+  .opt:active{transform:scale(.98)}
+  .opt b{display:block;font-size:15px;font-weight:600;color:var(--blue)}
+  .opt small{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+
+  .result-top{background:var(--blue);color:#fff;border-radius:14px;padding:18px;margin-bottom:12px;position:relative;overflow:hidden}
+  .result-top::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red)}
+  .rt-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{background:#fff;color:var(--blue);font-weight:700;font-size:16px;padding:8px 14px;border-radius:999px;border:2px solid var(--red)}
+  .pill.pending{background:transparent;color:#fff;border:2px dashed rgba(255,255,255,.55);font-weight:600}
+  .rt-sum{font-size:13px;opacity:.85;margin-top:12px}
+
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+  .badge.ok{background:var(--ok-bg);color:var(--ok)}
+  .badge.prov{background:var(--warn-bg);color:var(--warn)}
+
+  .rows{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .row{padding:13px 16px;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .row .k{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .row .v{font-size:15px;font-weight:500}
+  .row .v.pending{color:var(--muted);font-style:italic;font-weight:400}
+  .alert{background:var(--red-soft);border-left:4px solid var(--red);border-radius:10px;padding:12px 14px;font-size:14px;margin-top:12px;line-height:1.45}
+  .alert b{color:var(--red)}
+
+  .actions{display:flex;gap:10px;margin-top:18px}
+  .btn{flex:1;font:inherit;font-weight:600;font-size:14.5px;padding:12px;border-radius:10px;cursor:pointer;border:1.5px solid var(--blue)}
+  .btn.primary{background:var(--blue);color:#fff}
+  .btn.ghost{background:#fff;color:var(--blue)}
+
+  footer{border-top:1px solid var(--line);text-align:center;font-size:11.5px;color:var(--muted);padding:16px;line-height:1.5}
+  footer b{color:var(--blue)}
+  footer a{color:var(--blue);font-weight:600}
+
+
+  .sitebar{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:14px}
+  .seg{flex:1;font:inherit;font-size:13px;font-weight:600;color:var(--blue);background:none;border:0;border-radius:9px;padding:8px 4px;cursor:pointer}
+  .seg.on{background:var(--blue);color:#fff}
+  .hint{font-size:13.5px;color:var(--muted);margin:-8px 0 14px}
+  .opt.check{position:relative;padding-left:42px}
+  .opt.check::before{content:"";position:absolute;left:14px;top:16px;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;background:#fff}
+  .opt.check.on{border-color:var(--blue);background:#EEF2FA}
+  .opt.check.on::before{background:var(--blue);border-color:var(--blue)}
+  .opt.check.on::after{content:"";position:absolute;left:20px;top:19px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--warn);background:var(--warn-bg);padding:2px 6px;border-radius:999px;vertical-align:2px;margin-left:4px}
+  .btn:disabled{opacity:.45;cursor:default}
+  .card{margin-top:16px}
+  .card-h{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .card-h h3{font-size:16px;font-weight:700;color:var(--blue)}
+  .card-h .badge{margin-bottom:0}
+  .card-orders{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .mini-pill{font-size:12.5px;font-weight:700;color:var(--blue);background:#fff;border:1.5px solid var(--red);padding:3px 10px;border-radius:999px}
+  .alert.split{margin-top:0;margin-bottom:4px}
+  .pill.pending{font-size:13px}
+  .grab{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .grab li{background:#fff;color:var(--ink);border-left:4px solid var(--red);border-radius:10px;padding:10px 12px}
+  .grab li.g-pending{background:transparent;color:#fff;border:1.5px dashed rgba(255,255,255,.5)}
+  .g-what{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--red)}
+  .g-pending .g-what{color:#fff;opacity:.8}
+  .g-how{display:block;font-size:15.5px;font-weight:700;color:var(--blue);margin-top:2px}
+  .g-pending .g-how{color:#fff;font-weight:500;font-style:italic}
+  .order-ref{font-size:13.5px;color:var(--muted)}
+
+  .top{background:var(--blue);color:#fff;border-bottom:3px solid var(--red)}
+  .top-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .badge-ir{width:40px;height:40px;border-radius:8px;background:var(--red);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .b-name{font-weight:700;font-size:16px;line-height:1.2}
+  .b-sub{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent)}
+  .top-tag{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;opacity:.65;text-align:right}
+  .hero{background:var(--blue);color:#fff;border-bottom:3px solid var(--red)}
+  .hero-in{max-width:760px;margin:0 auto;padding:48px 16px 40px}
+  .h-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)}
+  .h-title{font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.12;margin:12px 0 16px;letter-spacing:-.5px}
+  .h-title em{color:var(--accent);font-style:italic}
+  .h-sub{font-size:16.5px;line-height:1.6;opacity:.8;max-width:600px}
+  .h-by{font-size:14px;font-style:italic;opacity:.5;margin-top:18px}
+  .notice{background:#FFF8EC;border-bottom:1px solid #F1DFC0;color:#6B4A12;font-size:13.5px;line-height:1.5;padding:12px 16px;display:flex;gap:8px;justify-content:center}
+  .notice span:last-child{max-width:900px}
+  .notice b{color:#5A2E00}
+  .stepper{display:grid;grid-template-columns:repeat(4,1fr);background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px}
+  .st{display:flex;align-items:center;gap:8px;padding:12px 14px;font:inherit;font-size:14px;color:var(--muted);background:none;border:0;border-right:1px solid var(--line);text-align:left;cursor:default}
+  .st:last-child{border-right:0}
+  .st i{font-style:normal;width:22px;height:22px;border:1.5px solid currentColor;border-radius:50%;font-size:11.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .st.on{background:#EEF2FA;color:var(--blue);font-weight:600}
+  .st.done{color:var(--blue);cursor:pointer}
+  .st.done i{background:var(--blue);border-color:var(--blue);color:#fff}
+  .st small{display:block;font-size:11.5px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .st span{min-width:0}
+  .hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .hcard{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .hcard:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(1,31,91,.08)}
+  .hcard b{display:block;font-size:16px;color:var(--blue)}
+  .hcard .addr{display:block;font-size:13.5px;color:var(--muted);margin-top:4px}
+  .hcard .st-tag{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:10px;color:var(--ok)}
+  .hcard .st-tag.warn{color:var(--warn)}
+  @media (max-width:600px){
+    .top-tag{display:none}
+    .hero-in{padding:32px 16px 28px}
+    .st{padding:10px 8px;font-size:12px;flex-direction:column;gap:4px;text-align:center}
+    .st small{display:none}
+  }
+  .res{background:#FCFCFA;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:18px}
+  .res-h{background:var(--blue);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:4px solid var(--red)}
+  .res-h h3{font-size:22px;font-weight:700;line-height:1.2}
+  .res-h p{font-size:14.5px;opacity:.65;margin-top:4px}
+  .res-site{background:#FCE9E9;color:var(--red);border:1.5px solid var(--accent);font-weight:700;font-size:13.5px;padding:5px 12px;border-radius:8px;white-space:nowrap}
+  .res-o{background:var(--blue-2);color:#fff;padding:14px 24px 16px}
+  .res-o-k{font-size:11.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent)}
+  .res-o-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .res-o-pills span{background:#FDF3F3;color:var(--blue);font-weight:700;font-size:14px;padding:6px 14px;border-radius:8px;border:1.5px solid var(--accent)}
+  .r-row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 24px;border-top:1px solid var(--line)}
+  .r-row:first-child{border-top:0}
+  .r-k{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#7A8296;padding-top:2px}
+  .r-v{font-size:15.5px;line-height:1.5}
+  .r-alert{display:flex;gap:10px;border-radius:12px;padding:14px 18px;margin-top:10px;font-size:15px;line-height:1.45}
+  .r-alert b{font-weight:700}
+  .r-alert.warn{background:#FFF9EA;border:1.5px solid #F2D78C;color:#7A4A0B}
+  .r-alert.info{background:#EEF2FA;border:1.5px solid #C9D3E8;color:var(--blue)}
+  .r-actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .r-actions .btn{flex:0 0 auto;padding:12px 22px}
+  .r-actions .btn.primary{background:#EEF2FA;color:var(--blue);border:1.5px solid var(--blue)}
+  .r-actions .btn.ghost{border-color:var(--line);color:var(--muted)}
+  @media (max-width:600px){
+    .res-h{padding:16px 18px}.res-h h3{font-size:19px}
+    .res-o{padding:12px 18px 14px}
+    .r-row{grid-template-columns:1fr;gap:4px;padding:12px 18px}
+  }
+  .ics{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:8px}
+  .ic{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-width:56px;padding:8px 8px 6px;background:#fff;border:1px solid var(--line);border-radius:10px}
+  .ic svg{display:block}
+  .ic figcaption{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+  @media print{.top,.hero,.notice,.stepper,.crumbs,.r-actions,footer{display:none!important}.res{break-inside:avoid}}
+  @media (max-width:380px){.grid{grid-template-columns:1fr}}
+  /* ---- Mount Sinai theme: white, minimal ---- */
+  :root{
+    --blue:#221F72; --blue-2:#221F72;
+    --red:#D80B8C; --red-soft:#FDF0F7; --accent:#D80B8C;
+    --bg:#FFFFFF; --line:#E6E6EE; --muted:#626275;
+  }
+  body{background:#fff}
+  .top{background:#fff;color:var(--blue);border-bottom:1px solid var(--line)}
+  .badge-ir{background:var(--blue);width:34px;height:34px;font-size:13px;border-radius:6px}
+  .b-sub{color:var(--red)}
+  .top-nav{display:flex;gap:18px}
+  .top-nav a{white-space:nowrap;font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+  .top-nav a.on{color:var(--blue);font-weight:600;border-bottom-color:var(--red)}
+  .hero{background:#fff;color:var(--ink);border-bottom:0}
+  .hero-in{padding:40px 16px 18px}
+  .h-eyebrow{color:var(--red)}
+  .h-title{color:var(--blue)}
+  .h-title em{color:var(--red)}
+  .h-sub{opacity:1;color:var(--muted)}
+  .h-by{opacity:1;color:var(--muted)}
+  .notice{background:#fff;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted)}
+  .notice b{color:var(--ink);font-weight:600}
+  .stepper{border-color:var(--line)}
+  .st.on{background:#F4F3FA}
+  .opt,.hcard{border-width:1px}
+  .opt:hover,.hcard:hover{box-shadow:none}
+  .opt.check.on{background:#F4F3FA}
+  .res{background:#fff;border-radius:12px}
+  .res-h{background:#fff;color:var(--ink);border-bottom:1px solid var(--line);padding:16px 20px}
+  .res-h h3{color:var(--blue);font-size:19px}
+  .res-h p{opacity:1;color:var(--muted)}
+  .res-site{background:#fff;color:var(--blue);border:1px solid var(--line);font-size:12.5px}
+  .res-o{background:#FAFAFC;color:var(--ink);border-bottom:1px solid var(--line)}
+  .res-o-k{color:var(--muted)}
+  .res-o-pills span{background:#fff;color:var(--blue);border:1px solid var(--line)}
+  .r-row{padding:12px 20px}
+  .r-alert.info{background:#F7F7FA;border:1px solid var(--line);color:var(--ink)}
+  .r-actions .btn.primary{background:#fff}
+  .prov-line{font-size:13px;color:var(--muted);margin:4px 0 2px}
+  .fx + .fx{margin-top:12px}
+  @media (max-width:600px){ .top-nav{gap:14px} .top-nav a{font-size:13px} .hero-in{padding:28px 16px 14px} }
+  mark.ask{background:#FFF1A8;color:inherit;padding:0 3px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .res-o-pills span mark.ask{padding:0}
+
+</style>
+<!-- Usage tracking (GoatCounter). Replace GC_CODE with your GoatCounter site code. Logs only site/specimen/test picked; no patient info. -->
+<script>window.GC_CODE="anirudh";</script>
+<script>if(window.GC_CODE!=="GC_CODE"){var g=document.createElement("script");g.async=true;g.src="https://gc.zgo.at/count.js";g.dataset.goatcounter="https://"+window.GC_CODE+".goatcounter.com/count";document.head.appendChild(g);}</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <div class="badge-ir">IR</div>
+      <div><div class="b-name">Mount Sinai</div><div class="b-sub">IR Specimen Guide</div></div>
+    </div>
+    <nav class="top-nav"><a href="#" id="navGuide">Specimens</a><a href="#fixatives" id="navFix">Fixatives</a></nav>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-in">
+    <p class="h-eyebrow">Interventional Radiology · The Mount Sinai Hospital</p>
+    <h1 class="h-title">Know exactly how to handle every <em>specimen</em>.</h1>
+    <p class="h-sub">Select your hospital, specimen type, and clinical purpose to get handling instructions at the point of care.</p>
+    <p class="h-by">Built by Anirudh Bikmal</p>
+  </div>
+</section>
+<div class="notice" id="notice"><span><b>Draft for Mount Sinai pathology review.</b> <mark class="ask">Highlighted</mark> items are educated guesses that need confirmation. Not an official Mount Sinai resource. Verify with the lab before clinical use.</span></div>
+
+<main>
+  <nav class="stepper" id="stepper"></nav>
+  <div class="crumbs" id="crumbs"></div>
+  <div id="view"></div>
+</main>
+
+<footer>Questions, feedback, or something you'd like added? Email <a href="mailto:anirudhbikmal@gmail.com?subject=IR%20Specimen%20Guide%20(Mount%20Sinai)">anirudhbikmal@gmail.com</a><br>Built by <b>Anirudh Bikmal</b> · Always confirm with the posted site protocol or lab if unsure.</footer>
+
+<script>
+/* ============================================================
+   CONFIG — edit these lists as Penn protocols come in
+   ============================================================ */
+
+const SITES = [
+  { id:"msh", name:"Mount Sinai", short:"MSH", full:"The Mount Sinai Hospital", addr:"1 Gustave L. Levy Place" },
+];
+
+const CATEGORIES = [
+  { id:"tissue", name:"Tissue biopsy",  desc:"Core / FNA from organ or mass" },
+  { id:"fluid",  name:"Body fluid",     desc:"Aspirate, drainage, or collection" },
+];
+
+const SPECIMENS = {
+  tissue: [
+    { id:"liver_nt",  name:"Liver, nontargeted",  desc:"Medical / parenchymal" },
+    { id:"liver_m",   name:"Liver mass" },
+    { id:"kidney_nt", name:"Kidney, nontargeted", desc:"Medical renal, native or transplant" },
+    { id:"kidney_m",  name:"Kidney mass" },
+    { id:"lung",      name:"Lung" },
+    { id:"ln",        name:"Lymph node" },
+    { id:"bone",      name:"Bone" },
+    { id:"soft",      name:"Soft tissue" },
+    { id:"adrenal",   name:"Adrenal" },
+    { id:"thyroid",   name:"Thyroid", desc:"FNA" },
+    { id:"bm",        name:"Bone marrow", desc:"Core biopsy + aspirate" },
+  ],
+  fluid: [
+    { id:"pleural",   name:"Pleural fluid", desc:"Thoracentesis" },
+    { id:"ascites",   name:"Ascites / peritoneal", desc:"Paracentesis" },
+    { id:"abscess",   name:"Abscess", desc:"Aspiration / drain placement" },
+    { id:"coll",      name:"Other collection", desc:"Biloma, urinoma, lymphocele, seroma" },
+    { id:"bile",      name:"Bile", desc:"Cholangiogram / biliary drainage" },
+    { id:"neph",      name:"Nephrostomy urine", desc:"PCN placement / exchange" },
+    { id:"joint",     name:"Joint fluid", desc:"Arthrocentesis" },
+    { id:"csf",       name:"CSF", desc:"Lumbar puncture" },
+  ],
+};
+
+const PURPOSES = {
+  path:  { name:"Histopathology",      desc:"Routine surgical pathology" },
+  bact:  { name:"Bacterial culture",   desc:"Gram stain, aerobic + anaerobic" },
+  afb:   { name:"AFB culture",         desc:"Mycobacteria" },
+  fungal:{ name:"Fungal culture" },
+  cyto:  { name:"Cytology",            desc:"Non-gyn cytology" },
+  flow:  { name:"Flow cytometry",      desc:"Leukemia / lymphoma" },
+  molec: { name:"Molecular / NGS" },
+  count: { name:"Cell count" },
+  chem:  { name:"Chemistry",           desc:"Protein, LDH, glucose, etc." },
+  aspirate:{ name:"Aspirate", desc:"Morphology, flow, cytogenetics" },
+  slides:{ name:"Bedside slides", desc:"Smears / touch preps (optional)" },
+};
+
+const PURPOSE_MAP = {
+  liver_nt:["path","bact","afb","fungal"],
+  liver_m:["path","cyto","molec","bact"],
+  kidney_nt:["path"],
+  kidney_m:["path","cyto","molec"],
+  lung:["path","cyto","molec","bact","afb","fungal"],
+  ln:["path","flow","cyto","bact","afb","fungal"],
+  bone:["path","bact","afb","fungal","molec"],
+  soft:["path","flow","bact","afb","fungal"],
+  adrenal:["path","cyto"],
+  thyroid:["cyto","molec"],
+  bm:["path","aspirate","slides"],
+  pleural:["cyto","count","chem","bact","afb","fungal","flow"],
+  ascites:["cyto","count","chem","bact","afb","fungal","flow"],
+  abscess:["bact","afb","fungal","cyto"],
+  coll:["chem","bact","cyto"],
+  bile:["bact","cyto"],
+  neph:["bact","count","cyto"],
+  joint:["count","bact","afb","fungal"],
+  csf:["count","chem","cyto","flow","bact"],
+};
+
+/* PROTOCOLS[site][specimen][purpose]
+   Current content = standard practice, pending Mount Sinai pathology review.
+   When an entry is confirmed, add source:"verified". Add orders:[...] and full
+   destinations (location, hours, phone) as they come in. */
+const PROTOCOLS = {};
+function setP(site, spec, purpose, obj){
+  PROTOCOLS[site] ??= {}; PROTOCOLS[site][spec] ??= {};
+  PROTOCOLS[site][spec][purpose] = obj;
+}
+
+const LAB = {
+  surg:"Surgical Pathology", micro:"Microbiology", cyto:"Cytopathology",
+  heme:"Hematopathology / Flow Cytometry", renal:"Renal Pathology",
+  cg:"Cytogenetics", chem:"Clinical Chemistry", hem:"Hematology",
+};
+const has = (id,k) => PURPOSE_MAP[id].includes(k);
+const ALL = Object.values(SPECIMENS).flat();
+
+SITES.forEach(({id:site}) => {
+  /* [[...]] = educated guess; rendered highlighted for the lab to confirm or correct.
+     Plain text = from Sinai's own documents (fixative table, flow cytometry requisition)
+     or a rule that holds everywhere (e.g. nothing for culture or flow goes in formalin). */
+  const D = k => LAB[k] + " · [[location, hours, phone: lab to provide]]";
+  const ORD = ["[[order name: lab to provide]]"];
+  const FLOW = "MSHS Flow Cytometry Laboratory, Icahn Building Room 856, 1425 Madison Ave · 212-241-2042";
+  const FLOW_SRC = " Source: Sinai flow cytometry requisition.";
+  const isTissue = id => SPECIMENS.tissue.some(t=>t.id===id);
+
+  /* ---- Tissue: histopathology ---- */
+  SPECIMENS.tissue.filter(s => has(s.id,"path") && !["kidney_nt","bm"].includes(s.id)).forEach(({id}) => setP(site, id, "path", {
+    orders:ORD,
+    container:"Formalin container",
+    medium:"10% neutral buffered formalin",
+    destination:D("surg"),
+    notes:"Place cores in formalin right away. [[About 10:1 formalin to tissue. Label with name, MRN, DOB and specimen site; list clinical history and any special studies on the requisition. Room temperature.]]" +
+      (id==="ln" ? " If lymphoma is on the differential, also select Lymphoma workup." : "") +
+      (id==="bone" ? " Note that it's bone so it gets decalcified. [[If molecular testing is planned, tell pathology so they use EDTA rather than acid decalcification.]]" : "") +
+      (id==="liver_nt" ? " [[Aim for at least 2 cm total core length (16–18 G). For iron or copper quantification, an extra core in a dry, metal-free container.]]" : ""),
+  }));
+
+  /* ---- Kidney, nontargeted ---- */
+  setP(site, "kidney_nt", "path", {
+    orders:ORD,
+    container:"Formalin, Michel's fixative, and glutaraldehyde",
+    medium:"Formalin for light microscopy, Michel's for immunofluorescence, glutaraldehyde for electron microscopy. [[Usually 2–3 cores, divided at the table: small cortical ends (1 mm pieces) in glutaraldehyde, a portion in Michel's, the rest in formalin.]]",
+    destination:D("renal"),
+    notes:"Refrigerate the glutaraldehyde. [[A renal pathology tech checks for glomeruli on-site if available.]]",
+    alert:"put all cores in formalin. Immunofluorescence can't be done on formalin-fixed tissue.",
+  });
+
+  /* ---- Tissue: bacterial culture ---- */
+  SPECIMENS.tissue.filter(s => has(s.id,"bact")).forEach(({id}) => setP(site, id, "bact", {
+    orders:ORD,
+    container:"Sterile container",
+    medium:"Fresh. [[A few drops of sterile non-bacteriostatic saline to keep it moist]]",
+    destination:D("micro"),
+    notes:"[[Order Gram stain plus aerobic and anaerobic culture. Room temperature; deliver within 2 hours.]]",
+    alert:"put it in formalin.",
+  }));
+
+  /* ---- AFB / fungal ---- */
+  ["afb","fungal"].forEach(k => ALL.filter(s => has(s.id,k)).forEach(({id}) => setP(site, id, k, {
+    orders:ORD,
+    container:"Sterile container",
+    medium:"Fresh",
+    destination:D("micro"),
+    notes: isTissue(id) ? "[[Can share the culture container if there's enough tissue; otherwise send a separate piece. Room temperature.]]"
+                        : "[[At least 10 mL; more improves yield. Send fluid in a sterile container, not blood culture bottles. Room temperature.]]",
+    alert: isTissue(id) ? "put it in formalin." : undefined,
+  })));
+
+  /* ---- Tissue FNA cytology ---- */
+  SPECIMENS.tissue.filter(s => has(s.id,"cyto")).forEach(({id}) => setP(site, id, "cyto", {
+    orders:ORD,
+    container:"CytoLyt",
+    medium:"CytoLyt for needle rinses",
+    destination:D("cyto"),
+    notes:"[[Rinse each pass into CytoLyt for the cell block. If on-site evaluation (ROSE) is available, call cytology ahead of the case; they make the smears.]]" +
+      (["ln"].includes(id) ? " If lymphoma is possible, send a separate pass for flow (see Lymphoma workup)." : ""),
+    alert:"put FNA material in formalin.",
+  }));
+
+  /* ---- Molecular ---- */
+  SPECIMENS.tissue.filter(s => has(s.id,"molec") && s.id!=="thyroid").forEach(({id}) => setP(site, id, "molec", {
+    orders:ORD,
+    container:"[[Extra cores in formalin]]",
+    medium:"[[10% neutral buffered formalin. Testing runs on the paraffin block]]",
+    destination:"[[Surgical Pathology]] · [[location, hours, phone: lab to provide]]",
+    notes:"[[Take 1–2 extra cores and note planned NGS / molecular testing on the requisition.]]" +
+      (id==="bone" ? " [[Ask for EDTA decalcification.]]" : ""),
+  }));
+  setP(site, "thyroid", "molec", {
+    orders:ORD,
+    container:"[[ThyroSeq or Afirma kit vial, whichever endocrinology ordered]]",
+    medium:"[[Per kit]]",
+    destination:"[[Send-out, per kit instructions]]",
+    notes:"[[1–2 dedicated passes into the kit vial. Follow the kit's storage instructions (often refrigerated).]]",
+  });
+
+  /* ---- Lymphoma workup (tissue): Sinai flow requisition ---- */
+  ["ln","soft"].forEach(id => setP(site, id, "flow", {
+    orders:ORD,
+    container:"RPMI 1640",
+    medium:"Fresh tissue in RPMI. Refrigerate with cold packs",
+    destination:FLOW + " [[Confirm whether IR sends straight to Flow or through Surgical Pathology.]]",
+    notes:"Send right after collection. After hours or holidays, put it in the storage bin in the sample drop-off refrigerator. Rejected if fixed, frozen, or above 37 °C. [[1–2 cores.]]" + FLOW_SRC,
+    alert:"put it in formalin. Flow can't be done on fixed tissue.",
+  }));
+
+  /* ---- Bone marrow ---- */
+  setP(site, "bm", "path", {
+    orders:ORD,
+    container:"B-Plus fixative",
+    medium:"B-Plus fixative",
+    destination:D("heme"),
+    notes:"[[First core into B-Plus. Room temperature; deliver the same day.]]",
+    alert:"put the aspirate in fixative.",
+  });
+  setP(site, "bm", "aspirate", {
+    orders:ORD,
+    container:"Flow: heparin or K2EDTA tube, 1–5 mL (Sinai flow requisition). [[Morphology: lavender (EDTA). Cytogenetics / FISH: green (sodium heparin).]]",
+    medium:"Fresh, anticoagulated. Flow sample at room temperature",
+    destination:"Flow: " + FLOW + ". [[Morphology: Hematopathology. Cytogenetics: Cytogenetics lab.]] [[location, hours, phone: lab to provide]]",
+    notes:"Rejected if clotted, hemolyzed, frozen or fixed. Sinai's fixative table lists RPMI for flow, but the flow requisition lists anticoagulant tubes for marrow; [[tubes are the likely answer for aspirate]]." + FLOW_SRC,
+    alert:"put the aspirate in formalin.",
+  });
+  setP(site, "bm", "slides", {
+    orders:[],
+    container:"Glass slides",
+    medium:"Air-dried, unfixed",
+    destination:D("heme"),
+    notes:"[[Smears from the first pull of aspirate, made at the bedside. Plastic slide mailer.]]",
+  });
+
+  /* ---- Fluids: bacterial culture ---- */
+  ["pleural","ascites"].forEach(id => setP(site, id, "bact", {
+    orders:ORD,
+    container:"Sterile container. [[Plus aerobic and anaerobic blood culture bottles inoculated at the bedside, about 10 mL each]]",
+    medium:"None",
+    destination:D("micro"),
+    notes:"[[Room temperature; deliver promptly.]]",
+  }));
+  ["abscess","coll","bile","joint"].forEach(id => setP(site, id, "bact", {
+    orders:ORD,
+    container:"Sterile container or capped syringe, needle removed",
+    medium:"None",
+    destination:D("micro"),
+    notes:"[[Order Gram stain plus aerobic and anaerobic culture. Send fluid, not a swab. Room temperature.]]",
+  }));
+  setP(site, "csf", "bact", {
+    orders:ORD,
+    container:"[[Sterile tube #2]]",
+    medium:"None",
+    destination:D("micro"),
+    notes:"[[Room temperature; deliver immediately.]]",
+    alert:"[[refrigerate CSF for culture.]]",
+  });
+  setP(site, "neph", "bact", {
+    orders:ORD,
+    container:"[[Sterile urine cup or urine culture tube]]",
+    medium:"None",
+    destination:D("micro"),
+    notes:"[[Enter nephrostomy as the source. Refrigerate if delayed more than 2 hours.]]",
+  });
+
+  /* ---- Fluids: cytology ---- */
+  ["pleural","ascites","abscess","coll","neph","csf"].forEach(id => setP(site, id, "cyto", {
+    orders:ORD,
+    container:"[[Sterile container, fresh. Small volumes may go in CytoLyt (Sinai's fixative table lists CytoLyt for fluids)]]",
+    medium:"[[Fresh, unfixed]]",
+    destination:D("cyto"),
+    notes: id==="csf" ? "[[At least 1 mL. Deliver immediately; cells degrade quickly.]]"
+         : id==="neph" ? "[[About 50 mL. Refrigerate if delayed.]]"
+         : ["pleural","ascites"].includes(id) ? "[[Send as much as practical, ideally 50 mL or more. Refrigerate if delayed.]]"
+         : "[[Refrigerate if delayed.]]",
+  }));
+  setP(site, "bile", "cyto", {
+    orders:ORD,
+    container:"[[Bile in a sterile container; brushings in CytoLyt]]",
+    medium:"[[Fresh bile; CytoLyt for brushings]]",
+    destination:D("cyto"),
+    notes:"[[Deliver promptly; cells degrade quickly in bile.]]",
+  });
+
+  /* ---- Fluids: flow (Sinai flow requisition) ---- */
+  ["pleural","ascites","csf"].forEach(id => setP(site, id, "flow", {
+    orders:ORD,
+    container:"Heparinized syringe or container",
+    medium:"Fresh, unfixed. Refrigerate with cold packs",
+    destination:FLOW,
+    notes:"Send right after collection. After hours or holidays, put it in the storage bin in the sample drop-off refrigerator. Rejected if fixed, frozen, clotted, or above 37 °C. " +
+      (id==="csf" ? "[[1–3 mL.]]" : "[[At least 10–20 mL.]]") + FLOW_SRC,
+    alert:"add fixative.",
+  }));
+
+  /* ---- Fluids: cell count ---- */
+  ["pleural","ascites","joint","csf","neph"].forEach(id => setP(site, id, "count", {
+    orders:ORD,
+    container: id==="neph" ? "[[Urinalysis tube]]" : id==="csf" ? "[[Sterile tube #1 or #3]]" : "[[Lavender (EDTA) tube]]",
+    medium: id==="neph"||id==="csf" ? "None" : "[[EDTA anticoagulant]]",
+    destination:"[[Hematology]] · [[location, hours, phone: lab to provide]]",
+    notes:"[[Deliver within 1 hour; counts degrade.]]" + (id==="joint" ? " [[Crystals can run from the same tube.]]" : ""),
+  }));
+
+  /* ---- Fluids: chemistry ---- */
+  ["pleural","ascites","coll","csf"].forEach(id => setP(site, id, "chem", {
+    orders:ORD,
+    container: id==="csf" ? "[[Sterile tube #2]]" : "[[Red or gold top tube]]" + (id==="pleural" ? ". [[pH: heparinized blood gas syringe, air expelled, sent immediately]]" : ""),
+    medium:"None",
+    destination:D("chem"),
+    notes: id==="pleural" ? "Protein, LDH, glucose. Send paired serum protein and LDH for Light's criteria."
+         : id==="ascites" ? "Albumin and total protein. Send a paired serum albumin for SAAG."
+         : id==="coll" ? "Biloma: bilirubin. Urinoma: creatinine. Lymphocele: triglycerides and creatinine. Compare each to a same-day serum value."
+         : "Protein and glucose, with a paired serum glucose.",
+  }));
+});
+
+/* ============================================================
+   APP
+   ============================================================ */
+const PROTO_ORDER = ["path","aspirate","slides","molec","flow","cyto","bact","afb","fungal","count","chem"];
+const FRESH_PURPOSES = ["bact","afb","fungal","flow","aspirate"];
+
+const state = { intro:false, site:null, cat:null, spec:null, picks:[], showResult:false };
+const $view = document.getElementById("view");
+const $crumbs = document.getElementById("crumbs");
+const $stepper = document.getElementById("stepper");
+
+(function(){
+  const img = new Image();
+  img.onload = () => { const s=document.querySelector(".badge-ir"); if(s){ s.innerHTML=""; s.style.background="#fff"; img.style.cssText="width:100%;height:100%;object-fit:contain"; s.appendChild(img);}  };
+  img.src = "logo.png"; img.alt = "";
+})();
+
+const siteById = id => SITES.find(s=>s.id===id);
+const catById  = id => CATEGORIES.find(c=>c.id===id);
+const specById = id => Object.values(SPECIMENS).flat().find(s=>s.id===id);
+const proto = (spec, k) => PROTOCOLS[state.site]?.[spec]?.[k];
+
+
+function purposeLabel(spec, k){
+  if(spec==="bm" && k==="path") return { name:"Core biopsy", desc:"Histology (first core)" };
+  if(k==="flow" && catById(state.cat)?.id==="tissue")
+    return { name:"Lymphoma workup", desc:"Flow cytometry. RPMI, not formalin" };
+  if(k==="path" && spec==="kidney_nt") return { name:"Medical renal workup", desc:"Light microscopy, IF, EM" };
+  if(k==="molec" && spec==="thyroid") return { name:"Molecular", desc:"Afirma, ThyroSeq, etc." };
+  if(k==="cyto" && spec==="thyroid") return { name:"FNA cytology", desc:"Fine needle aspirate" };
+  if(k==="cyto" && catById(state.cat)?.id==="tissue")
+    return { name:"FNA cytology", desc:"Fine needle aspirate" };
+  if(k==="count" && spec==="neph")
+    return { name:"Cell count (UA microscopic)", desc:"Urine RBC / WBC" };
+  if(k==="cyto" && spec==="bile")
+    return { name:"Cytology (brushing)", desc:"Biliary brushing" };
+  return PURPOSES[k];
+}
+
+function goBack(){
+  if(state.showResult) state.showResult=false;
+  else if(state.spec){ state.spec=null; state.picks=[]; }
+  else if(state.cat) state.cat=null;
+  else if(state.site) state.site=null;
+  render();
+}
+function renderCrumbs(){
+  if(!state.site){ $crumbs.innerHTML=""; return; }
+  const ctx=[siteById(state.site).name, state.cat&&catById(state.cat).name, state.spec&&specById(state.spec).name].filter(Boolean).join(" · ");
+  $crumbs.innerHTML=`<button class="back" id="topBack">‹ Back</button><span class="ctx">${ctx}</span>`;
+  document.getElementById("topBack").onclick=goBack;
+}
+
+function optButton(label, desc, onClick, extraClass="", tag=""){
+  const b = document.createElement("button");
+  b.className = "opt " + extraClass;
+  b.innerHTML = `<b>${label}${tag}</b>${desc?`<small>${desc}</small>`:""}`;
+  b.onclick = onClick;
+  return b;
+}
+
+const STEP_NAMES = ["Location","Specimen","Type","Purpose"];
+function renderStepper(){
+  const cur = !state.site?0 : !state.cat?1 : !state.spec?2 : 3;
+  const vals = [state.site&&siteById(state.site).name, state.cat&&catById(state.cat).name, state.spec&&specById(state.spec).name, null];
+  const labels = ["Hospital","Specimen","Type","Purpose"];
+  $stepper.innerHTML = labels.map((l,i)=>`<button class="st ${i===cur?"on":i<cur?"done":""}" data-i="${i}"><i>${i<cur?"✓":i+1}</i><span>${l}${vals[i]&&i<cur?`<small>${vals[i]}</small>`:""}</span></button>`).join("");
+  $stepper.querySelectorAll(".st.done").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; state.showResult=false;
+    if(i<=2){ state.spec=null; state.picks=[]; }
+    if(i<=1) state.cat=null;
+    if(i===0) state.site=null;
+    render();
+  });
+}
+function renderHospitals(){
+  $view.innerHTML = `<div class="step-label">Step 1 — Location</div><h2>Which hospital?</h2>
+    <div class="hgrid">${SITES.map(s=>{
+      const prov = Object.values(PROTOCOLS[s.id]||{}).some(o=>Object.values(o).some(p=>!p.source));
+      return `<button class="hcard" data-id="${s.id}"><b>${s.full}</b><span class="addr">${s.addr}</span><span class="st-tag${prov?" warn":""}">● ${prov?"Pending pathology review":"Verified"}</span></button>`;
+    }).join("")}</div>`;
+  $view.querySelectorAll(".hcard").forEach(b=>b.onclick=()=>{ state.site=b.dataset.id; render(); });
+}
+
+function screen(stepNum, title, items, oneCol){
+  $view.innerHTML = `<div class="step-label">Step ${stepNum} — ${STEP_NAMES[stepNum-1]}</div><h2>${title}</h2>`;
+  const g = document.createElement("div");
+  g.className = "grid" + (oneCol ? " one" : "");
+  items.forEach(i => g.appendChild(optButton(i.name, i.desc, i.go)));
+  $view.appendChild(g);
+}
+
+function renderPurposes(){
+  $view.innerHTML = `<div class="step-label">Step 4 — Purpose</div>
+    <h2>What is it going for?</h2>
+    <p class="hint">Select everything you're sending from this specimen.</p>`;
+  const g = document.createElement("div"); g.className = "grid";
+  PURPOSE_MAP[state.spec].forEach(k => {
+    const lab = purposeLabel(state.spec, k);
+    const on = state.picks.includes(k);
+    const tag = proto(state.spec,k) ? "" : ` <span class="tag">pending</span>`;
+    g.appendChild(optButton(lab.name, lab.desc, () => {
+      state.picks = on ? state.picks.filter(x=>x!==k) : [...state.picks, k];
+      renderPurposes();
+    }, "check" + (on?" on":""), tag));
+  });
+  $view.appendChild(g);
+  const n = state.picks.length;
+  const bar = document.createElement("div"); bar.className = "actions";
+  bar.innerHTML = `<button class="btn primary" id="go" ${n?"":"disabled"}>${n?`Show handling for ${n}`:"Select at least one"}</button>`;
+  $view.appendChild(bar);
+  document.getElementById("go").onclick = () => { state.showResult = true; render(); };
+}
+
+function field(k, v){
+  const pending = !v;
+  return `<div class="row"><div class="k">${k}</div><div class="v${pending?" pending":""}">${pending?"Pending Sinai protocol":v}</div></div>`;
+}
+
+function badge(p){
+  return p?.source==="verified" ? `<span class="badge ok">✓ Verified with Mount Sinai pathology</span>`
+       : p?.source==="directory" ? `<span class="badge ok">✓ Verified</span>`
+       : `<span class="badge prov">Provisional · not yet verified</span>`;
+}
+
+function renderIntro(){
+  $view.innerHTML = `
+    <section class="intro">
+      <p class="eyebrow">Interventional Radiology · Mount Sinai</p>
+      <h2 class="intro-h">Send every specimen the right way, the first time.</h2>
+      <p class="intro-p">A quick point-of-care reference for what container, medium and lab each IR specimen needs, so nothing ends up in formalin that shouldn't.</p>
+      <button class="btn primary start" id="startBtn">Start a lookup</button>
+      <div class="how">
+        <div><span>1</span>Pick the hospital</div>
+        <div><span>2</span>Pick the specimen</div>
+        <div><span>3</span>Select every test it's going for</div>
+      </div>
+      <div class="rule"><b>Rule of thumb:</b> anything for culture, flow, cytology or FISH goes FRESH. Split it off before anything touches formalin.</div>
+      <p class="src">Based on standard practice, pending Mount Sinai pathology review. Items marked <span class="badge prov">Provisional</span> are not yet confirmed. When in doubt, call the lab.</p>
+    </section>`;
+  document.getElementById("startBtn").onclick = () => { state.intro=false; render(); };
+}
+
+
+const TUBE = (cap, band) => `<svg viewBox="0 0 40 96" width="22" height="54"><rect x="9" y="4" width="22" height="16" rx="3" fill="${cap}"/>${band?`<rect x="9" y="14" width="22" height="6" fill="${band}"/>`:""}<path d="M11 20h18v62a9 9 0 0 1-18 0z" fill="#fff" stroke="#9AA3B5" stroke-width="2"/><rect x="11" y="40" width="18" height="22" fill="#E6EAF2"/></svg>`;
+const CUP = (fill) => `<svg viewBox="0 0 64 64" width="46" height="46"><rect x="12" y="10" width="40" height="9" rx="2" fill="#3B6FD8"/><path d="M15 19h34l-3 37a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z" fill="#fff" stroke="#9AA3B5" stroke-width="2"/>${fill?`<path d="M17 38h30l-1.6 18a3 3 0 0 1-3 3H21.6a3 3 0 0 1-3-3z" fill="${fill}" opacity=".55"/>`:""}</svg>`;
+const SYRINGE = `<svg viewBox="0 0 96 40" width="62" height="26"><rect x="6" y="14" width="8" height="12" rx="1" fill="#9AA3B5"/><rect x="14" y="18" width="12" height="4" fill="#9AA3B5"/><rect x="26" y="9" width="44" height="22" rx="3" fill="#fff" stroke="#9AA3B5" stroke-width="2"/><rect x="28" y="11" width="22" height="18" fill="#F3D9C9"/><path d="M70 16h8v8h-8z" fill="#9AA3B5"/><path d="M78 19h14v2H78z" fill="#5E6577"/></svg>`;
+const SWAB = `<svg viewBox="0 0 40 96" width="22" height="54"><rect x="9" y="4" width="22" height="14" rx="3" fill="#F2C94C"/><path d="M11 18h18v64a9 9 0 0 1-18 0z" fill="#fff" stroke="#9AA3B5" stroke-width="2"/><rect x="19" y="22" width="2" height="50" fill="#5E6577"/><ellipse cx="20" cy="76" rx="4" ry="7" fill="#C8B9A6"/></svg>`;
+const BOTTLE = `<svg viewBox="0 0 64 80" width="40" height="50"><rect x="22" y="4" width="20" height="12" rx="2" fill="#2E2E2E"/><path d="M18 16h28v8l6 6v40a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V30l6-6z" fill="#fff" stroke="#9AA3B5" stroke-width="2"/><rect x="13" y="44" width="38" height="26" fill="#F3E0A6" opacity=".7"/></svg>`;
+const SLIDE = `<svg viewBox="0 0 80 40" width="56" height="28"><rect x="4" y="8" width="72" height="24" rx="2" fill="#EAF2FB" stroke="#9AA3B5" stroke-width="2"/><rect x="4" y="8" width="18" height="24" fill="#D6DBE3"/><ellipse cx="46" cy="20" rx="12" ry="7" fill="#E7A9A9" opacity=".8"/></svg>`;
+function containerIcons(p){
+  if(!sure(p.container).trim()) return "";
+  const t = sure(p.container)+" "+sure(p.medium);
+  const out=[];
+  const add=(svg,cap)=>out.push(`<figure class="ic">${svg}<figcaption>${cap}</figcaption></figure>`);
+  if(/non-additive tube/i.test(t)) add(TUBE("#E7E9EE","#C94A4A"),"Sterile tube");
+  else if(/UA tube|urinalysis tube/i.test(t)) add(TUBE("#F2C94C","#D64545"),"UA tube");
+  else if(/urine culture tube/i.test(t)) add(TUBE("#8A8F99"),"Urine culture tube");
+  if(/lavender|EDTA/i.test(t)) add(TUBE("#9B7BC8"),"Lavender (EDTA)");
+  if(/green/i.test(t)) add(TUBE("#2E8B57"),"Green (heparin)");
+  if(/pink/i.test(t)) add(TUBE("#E98CB4"),"Pink (EDTA)");
+  if(/evacuated/i.test(t)) add(BOTTLE,"Evacuated bottle");
+  if(/syringe/i.test(t)) add(SYRINGE,"Syringe");
+  if(/blood culture bottles/i.test(t)) add(BOTTLE,"Culture bottles");
+  if(/red \/ gold/i.test(t)) add(TUBE("#C94A4A","#E0B33A"),"Red / gold top");
+  if(/blood gas syringe/i.test(t)) add(SYRINGE,"Blood gas syringe");
+  if(/Michel/i.test(t)) add(CUP("#F2E4A0"),"Michel's");
+  if(/glutaraldehyde/i.test(t)) add(CUP("#CFE0F4"),"Glutaraldehyde");
+  if(/B-Plus/i.test(t)) add(CUP("#E3D9F0"),"B-Plus");
+  if(/RPMI/i.test(t)) add(CUP("#F6C3D4"),"RPMI");
+  if(/CytoLyt/i.test(t)) add(CUP("#BFD8F2"),"CytoLyt");
+  if(/kit vial/i.test(t)) add(TUBE("#5E6577"),"Kit vial");
+  if(/formalin/i.test(t)) add(CUP("#F5E6A3"),"Formalin jar");
+  else if(/saline/i.test(t)) add(CUP("#BFD8F2"),"Cup + saline");
+  else if(!out.length || /sterile.*container|sterile, leak-proof/i.test(t)) add(CUP(),"Sterile cup");
+  if(/Eswab/i.test(t)) add(SWAB,"Eswab");
+  if(/slide/i.test(t)) { out.length=0; add(SLIDE,"Slides + mailer"); }
+  return out.length?`<div class="ics">${out.join("")}</div>`:"";
+}
+const hl = t => (t||"").replace(/\[\[(.+?)\]\]/g, '<mark class="ask">$1</mark>');
+const sure = t => (t||"").replace(/\[\[(.+?)\]\]/g, "");
+function renderResult(){
+  const picks = PROTO_ORDER.filter(k => state.picks.includes(k));
+  try{ window.goatcounter?.count?.({ path:`lookup/${state.site}/${state.spec}/${picks.join("+")}`,
+    title:`${siteById(state.site).name} · ${specById(state.spec).name} · ${picks.map(k=>purposeLabel(state.spec,k).name).join(", ")}`, event:true }); }catch(e){}
+  const pathFixed = picks.includes("path") && /formalin/i.test(proto(state.spec,"path")?.medium||"");
+  const freshOnes = picks.filter(k => FRESH_PURPOSES.includes(k));
+  const split = pathFixed && freshOnes.length
+    ? `<div class="r-alert warn split"><b>!</b><span><b>Split it.</b> Set aside the ${(a=>a.length>1?a.slice(0,-1).join(", ")+" and "+a.at(-1):a[0])(freshOnes.map(k=>purposeLabel(state.spec,k).name.toLowerCase()))} portion${freshOnes.length>1?"s":""} FRESH before anything touches formalin.</span></div>` : "";
+
+  const site = siteById(state.site), spec = specById(state.spec);
+  const row = (k,v) => v ? `<div class="r-row"><div class="r-k">${k}</div><div class="r-v">${v}</div></div>` : "";
+  const cards = picks.map(k => {
+    const p = proto(state.spec,k) || {};
+    const lab = purposeLabel(state.spec,k).name;
+    const med = /^none/i.test(p.medium||"") ? "Fresh, no fixative" : p.medium;
+    return `<section class="res">
+      <div class="res-h">
+        <div><h3>${spec.name}</h3><p>${lab} · ${site.full}</p></div>
+        <span class="res-site">${site.short||site.name}</span>
+      </div>
+      ${p.orders?.length?`<div class="res-o">
+        <div class="res-o-k">Order name · placed by primary team</div>
+        <div class="res-o-pills">${p.orders.map(o=>`<span>${hl(o)}</span>`).join("")}</div>
+      </div>`:""}
+      <div class="res-b">
+        ${p.container ? row("Container", containerIcons(p) + hl(p.container)) + row("Medium / prep", hl(med)) + row("Send to", hl(p.destination)) + row("Notes", hl(p.notes))
+                      : row("Status", "Pending Sinai protocol")}
+      </div>
+    </section>
+    ${p.alert?`<div class="r-alert warn"><b>!</b><span>Do not ${hl(p.alert)}</span></div>`:""}
+    `;
+  }).join("");
+
+  const prov = picks.some(k => { const p=proto(state.spec,k); return p && !p.source; });
+  $view.innerHTML = `${prov?`<p class="prov-line"><mark class="ask">Highlighted</mark> = educated guess, needs lab confirmation.</p>`:""}${split}${cards}
+    <div class="r-actions">
+      <button class="btn primary" id="restartBtn">← New lookup</button>
+      <button class="btn ghost" id="printBtn">Print / save PDF</button>
+    </div>`;
+  document.getElementById("restartBtn").onclick = ()=>{ state.cat=state.spec=null; state.picks=[]; state.showResult=false; render(); };
+  document.getElementById("printBtn").onclick = ()=>window.print();
+}
+
+const FIXATIVES = [
+ { name:"10% Neutral Buffered Formalin", use:"Routine surgical pathology",
+   adv:"Excellent overall tissue preservation; standard for H&E and IHC.", lim:"Antigen retrieval often needed for IHC." },
+ { name:"Michel's fixative", use:"Immunofluorescence",
+   adv:"Preserves morphology and antigenicity; detects antibody and complement deposits (renal, autoimmune). [[Table says it preserves “fresh unfixed tissues”; confirm meaning]]", lim:"Less commonly used than formalin." },
+ { name:"B-Plus fixative", use:"Bone marrow and hematopoietic tissue",
+   adv:"Excellent nuclear detail; preserves bone marrow and lymph node biopsies.", lim:"[[Any limitation? The Sinai table did not list one]]" },
+ { name:"Glutaraldehyde", use:"Electron microscopy",
+   adv:"Superior ultrastructural preservation (renal, muscle, nerve).", lim:"Poor penetration; not for routine histology.", store:"Refrigerate" },
+ { name:"Fresh (no fixative)", use:"Split testing: genetics, muscle, nerve, rule out lymphoma, microbiology",
+   adv:"One limited sample can be divided among several studies.", lim:"Autolyzes if left out of fixative.", store:"Refrigerate if not delivered promptly",
+   callout:"Send fresh only when there is too little tissue for separate containers. Best practice is a dedicated container with the correct fixative for each test." },
+ { name:"CytoLyt", use:"Cytology",
+   adv:"For fluid specimens and needle rinses; analysis of individual cells or small clusters." },
+ { name:"RPMI", use:"Flow cytometry",
+   adv:"Characterizes cell populations; used for hematopathology specimens.", store:"Refrigerate" },
+];
+function renderFixatives(){
+  const row = (k,v) => v ? `<div class="r-row"><div class="r-k">${k}</div><div class="r-v">${hl(v)}</div></div>` : "";
+  $view.innerHTML = `<div class="step-label">Reference</div><h2>Fixatives</h2>
+    <p class="hint">From Sinai's fixative table. <mark class="ask">Highlighted</mark> = needs confirmation.</p>
+    ${FIXATIVES.map(f=>`<section class="res fx">
+      <div class="res-h"><div><h3>${f.name}</h3><p>${f.use}</p></div>${f.store==="Refrigerate"?`<span class="res-site">Refrigerate</span>`:""}</div>
+      <div class="res-b">${row("Advantage",f.adv)}${row("Limitation",f.lim)}${row("Storage",f.store)}</div>
+    </section>${f.callout?`<div class="r-alert info"><b>i</b><span>${f.callout}</span></div>`:""}`).join("")}`;
+}
+
+function render(){
+  const fixOn = location.hash==="#fixatives";
+  document.getElementById("navFix").classList.toggle("on", fixOn);
+  document.getElementById("navGuide").classList.toggle("on", !fixOn);
+  $stepper.style.display = fixOn ? "none" : "";
+  if(fixOn){ $crumbs.innerHTML=""; document.getElementById("hero").style.display="none"; document.getElementById("notice").style.display="none"; window.scrollTo({top:0}); return renderFixatives(); }
+  renderCrumbs();
+  renderStepper();
+  const first = !state.site;
+  document.getElementById("hero").style.display = first ? "" : "none";
+  document.getElementById("notice").style.display = first ? "" : "none";
+  window.scrollTo({top:0});
+  if(first) return renderHospitals();
+  if(!state.cat){
+    return screen(2,"Specimen category", CATEGORIES.map(c=>({name:c.name,desc:c.desc,go:()=>{state.cat=c.id;render();}})), true);
+  }
+  if(!state.spec){
+    return screen(3, state.cat==="tissue"?"Organ / site":"Fluid type",
+      SPECIMENS[state.cat].map(s=>({name:s.name,desc:s.desc,go:()=>{state.spec=s.id;state.picks=[];render();}})));
+  }
+  if(!state.showResult) return renderPurposes();
+  renderResult();
+}
+
+addEventListener("hashchange", render);
+document.getElementById("navGuide").onclick = e => { e.preventDefault(); history.replaceState(null,"",location.pathname); state.site=state.cat=state.spec=null; state.picks=[]; state.showResult=false; render(); };
+render();
+</script>
+</body>
+</html>
