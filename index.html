@@ -273,7 +273,7 @@
 
 <section class="hero" id="hero">
   <div class="hero-in">
-    <p class="h-eyebrow">Interventional Radiology · The Mount Sinai Hospital</p>
+    <p class="h-eyebrow">Interventional Radiology · Mount Sinai Hospital · Mount Sinai West</p>
     <h1 class="h-title">Know exactly how to handle every <em>specimen</em>.</h1>
     <p class="h-sub">Select your hospital, specimen type, and clinical purpose to get handling instructions at the point of care.</p>
     <p class="h-by">Built by Anirudh Bikmal</p>
@@ -295,7 +295,8 @@
    ============================================================ */
 
 const SITES = [
-  { id:"msh", name:"Mount Sinai", short:"MSH", full:"The Mount Sinai Hospital", addr:"1 Gustave L. Levy Place" },
+  { id:"msh", name:"Mount Sinai Hospital", short:"MSH", full:"The Mount Sinai Hospital", addr:"1 Gustave L. Levy Place" },
+  { id:"msw", name:"Mount Sinai West", short:"MSW", full:"Mount Sinai West", addr:"1000 Tenth Avenue" },
 ];
 
 const CATEGORIES = [
@@ -389,7 +390,11 @@ SITES.forEach(({id:site}) => {
      or a rule that holds everywhere (e.g. nothing for culture or flow goes in formalin). */
   const D = k => LAB[k] + " · [[location, hours, phone: lab to provide]]";
   const ORD = ["[[order name: lab to provide]]"];
-  const FLOW = "MSHS Flow Cytometry Laboratory, Icahn Building Room 856, 1425 Madison Ave · 212-241-2042";
+  /* The flow requisition describes the main-campus lab; for other sites its logistics are a guess. */
+  const MAIN = site === "msh";
+  const g = t => MAIN ? t : "[[" + t + "]]";
+  const FLOW = g("MSHS Flow Cytometry Laboratory, Icahn Building Room 856, 1425 Madison Ave · 212-241-2042") + (MAIN ? "" : " [[sent from West by courier]]");
+  const AFTER = g("After hours or holidays, put it in the storage bin in the sample drop-off refrigerator.");
   const FLOW_SRC = " Source: Sinai flow cytometry requisition.";
   const isTissue = id => SPECIMENS.tissue.some(t=>t.id===id);
 
@@ -470,7 +475,7 @@ SITES.forEach(({id:site}) => {
     container:"RPMI 1640",
     medium:"Fresh tissue in RPMI. Refrigerate with cold packs",
     destination:FLOW + " [[Confirm whether IR sends straight to Flow or through Surgical Pathology.]]",
-    notes:"Send right after collection. After hours or holidays, put it in the storage bin in the sample drop-off refrigerator. Rejected if fixed, frozen, or above 37 °C. [[1–2 cores.]]" + FLOW_SRC,
+    notes:"Send right after collection. " + AFTER + " Rejected if fixed, frozen, or above 37 °C. [[1–2 cores.]]" + FLOW_SRC,
     alert:"put it in formalin. Flow can't be done on fixed tissue.",
   }));
 
@@ -555,7 +560,7 @@ SITES.forEach(({id:site}) => {
     container:"Heparinized syringe or container",
     medium:"Fresh, unfixed. Refrigerate with cold packs",
     destination:FLOW,
-    notes:"Send right after collection. After hours or holidays, put it in the storage bin in the sample drop-off refrigerator. Rejected if fixed, frozen, clotted, or above 37 °C. " +
+    notes:"Send right after collection. " + AFTER + " Rejected if fixed, frozen, clotted, or above 37 °C. " +
       (id==="csf" ? "[[1–3 mL.]]" : "[[At least 10–20 mL.]]") + FLOW_SRC,
     alert:"add fixative.",
   }));
